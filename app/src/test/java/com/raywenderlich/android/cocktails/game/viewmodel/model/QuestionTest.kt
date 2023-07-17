@@ -33,4 +33,10 @@ class QuestionTest {
         assertFalse("Option is correct",result)
     }
 
+    @Test(expected = java.lang.IllegalArgumentException::class)
+    fun whenAnswerWithInvalidOptionShouldThrowException(){
+        val question = Question("CORRECT","INCORRECT")
+        val result = question.answer("Invalid")
+    }
+
 }
