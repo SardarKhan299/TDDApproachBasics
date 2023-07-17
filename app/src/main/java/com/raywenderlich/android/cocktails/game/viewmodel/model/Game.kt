@@ -18,9 +18,13 @@ class Game(val questions: List<Question>, highScore: Int) {
         }
     }
 
-    fun nextQuestion(): Question {
-        questionIndex++
-        return questions[questionIndex]
+    fun nextQuestion(): Question? {
+        if(questionIndex+1 <questions.size) {
+            questionIndex++
+            return questions[questionIndex]
+        }else{
+            return null
+        }
     }
 
 }

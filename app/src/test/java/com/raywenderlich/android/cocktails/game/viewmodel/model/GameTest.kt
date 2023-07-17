@@ -48,6 +48,8 @@ class GameTest(){
     fun whenGettingNextQuestionIfReachEndReturnNull(){
         val question = Question("Correct","Incorrect")
         val game = Game(listOf(question),10)
+        game.nextQuestion()
+        game.nextQuestion()
         Assert.assertNull("Question is not null",game.nextQuestion())
 
     }
