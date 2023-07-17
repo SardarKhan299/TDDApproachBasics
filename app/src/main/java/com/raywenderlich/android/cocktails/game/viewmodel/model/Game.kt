@@ -1,6 +1,6 @@
 package com.raywenderlich.android.cocktails.game.viewmodel.model
 
-class Game {
+class Game(highScore: Int) {
 
     var score =0
         private set
