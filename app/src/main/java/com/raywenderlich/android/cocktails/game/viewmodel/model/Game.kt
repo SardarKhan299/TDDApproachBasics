@@ -2,12 +2,14 @@ package com.raywenderlich.android.cocktails.game.viewmodel.model
 
 import android.util.Log
 
-class Game(questions: List<Question>, highScore: Int) {
+class Game(val questions: List<Question>, highScore: Int) {
 
     var score =0
         private set
     var hightScore = highScore
         private set
+
+    private var questionIndex = -1
 
     fun incrementScore() {
         score++
@@ -16,8 +18,9 @@ class Game(questions: List<Question>, highScore: Int) {
         }
     }
 
-    fun nextQuestion() {
-
+    fun nextQuestion(): Question {
+        questionIndex++
+        return questions[questionIndex]
     }
 
 }
