@@ -9,6 +9,6 @@ class Question(correctOption: String, inCorrectOption: String) {
 
     fun answer(option: String): Boolean {
         answeredOption = option
-        return false
+        return true
     }
 }
