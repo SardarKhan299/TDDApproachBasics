@@ -2,6 +2,7 @@ package com.raywenderlich.android.cocktails.game.viewmodel.model
 
 import org.junit.Assert
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class QuestionTest {
@@ -17,6 +18,13 @@ class QuestionTest {
         val question = Question("CORRECT","INCORRECT")
         question.answer("OPTION")
         assertEquals("Answered Option is not There","OPTION",question.answeredOption)
+    }
+
+    @Test
+    fun whenAnswerWithCorrectOptionShouldReturnTrue(){
+        val question = Question("CORRECT","INCORRECT")
+        val result = question.answer("CORRECT")
+        assertTrue("Option is incorrect",result)
     }
 
 }
