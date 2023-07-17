@@ -1,6 +1,8 @@
 package com.raywenderlich.android.cocktails.game.viewmodel.model
 
-class Game(highScore: Int) {
+import android.util.Log
+
+class Game(questions: List<Question>, highScore: Int) {
 
     var score =0
         private set
@@ -12,6 +14,10 @@ class Game(highScore: Int) {
         if(score>hightScore){
             hightScore++
         }
+    }
+
+    fun nextQuestion() {
+
     }
 
 }

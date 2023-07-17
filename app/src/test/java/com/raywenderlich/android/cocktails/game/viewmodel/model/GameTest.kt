@@ -11,7 +11,7 @@ class GameTest(){
     @Test
     fun whenIncrementingScoreShouldIncrementSCore(){
         // Given
-        val game = Game(10)
+        val game = Game(listOf<Question>(), 10)
         // When
         game.incrementScore()
         // Then
@@ -20,7 +20,7 @@ class GameTest(){
 
     @Test
     fun whenIncrementScoreShouldIncrementHighScore(){
-        val game = Game(10)
+        val game = Game(listOf<Question>(), 10)
         game.incrementScore()
         if(game.hightScore==1){
             print("Success")
@@ -31,9 +31,17 @@ class GameTest(){
 
     @Test
     fun whenIncrementScore_belowHighScore_notIncrementHighScore(){
-        val game = Game(10)
+        val game = Game(listOf<Question>(), 10)
         game.incrementScore()
         assertEquals("High Score is Incrementing",10,game.hightScore)
+    }
+
+    @Test
+    fun whenCreatingGameItShouldHaveAListofQuestions(){
+        val question = Question("Correct","Incorrect")
+        val game = Game(listOf(question),10)
+        Assert.assertSame(question,game.nextQuestion())
+
     }
 
 
