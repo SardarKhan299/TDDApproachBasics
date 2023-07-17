@@ -14,8 +14,8 @@ class Question(private val correctOption: String, val inCorrectOption: String) {
         return isAnsweredCorrectly
     }
 
-    fun getOptions(): List<Question> {
-        return emptyList()
+    fun getOptions(sort:(List<String>)->List<String> = {it.shuffled()}): List<String> {
+        return sort(listOf(correctOption,inCorrectOption))
     }
 
 

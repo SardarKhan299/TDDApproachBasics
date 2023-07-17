@@ -44,8 +44,8 @@ class QuestionTest {
 
     @Test
     fun whenCreatingQuestionShouldReturnOptionWithCustomSort(){
-        val options = question.getOptions()
-        assertEquals(listOf("Correct","Incorrect"),options)
+        val options = question.getOptions{it.reversed()}
+        assertEquals(listOf("Incorrect","Correct"),options)
     }
 
 }
