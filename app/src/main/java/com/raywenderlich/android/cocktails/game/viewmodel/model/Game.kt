@@ -4,7 +4,7 @@ class Game(highScore: Int) {
 
     var score =0
         private set
-    var hightScore = 0
+    var hightScore = highScore
         private set
 
     fun incrementScore() {
