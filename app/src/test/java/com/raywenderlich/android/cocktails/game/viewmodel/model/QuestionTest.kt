@@ -21,19 +21,19 @@ class QuestionTest {
 
     @Test
     fun whenAnsweringQuestionShouldHaveAnsweredOption(){
-        question.answer("OPTION")
-        assertEquals("Answered Option is not There","OPTION",question.answeredOption)
+        question.answer("Correct")
+        assertEquals("Answered Option is not There","Correct",question.answeredOption)
     }
 
     @Test
     fun whenAnswerWithCorrectOptionShouldReturnTrue(){
-        val result = question.answer("CORRECT")
+        val result = question.answer("Correct")
         assertTrue("Option is incorrect",result)
     }
 
     @Test
     fun whenAnswerWithInCorrectOptionShouldReturnTrue(){
-        val result = question.answer("INCORRECT")
+        val result = question.answer("Incorrect")
         assertFalse("Option is correct",result)
     }
 

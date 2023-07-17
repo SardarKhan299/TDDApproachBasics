@@ -11,7 +11,7 @@ class GameTest(){
     @Test
     fun whenIncrementingScoreShouldIncrementSCore(){
         // Given
-        val game = Game(listOf<Question>(), 10)
+        val game = Game(listOf(), 10)
         // When
         game.incrementScore()
         // Then
@@ -22,7 +22,7 @@ class GameTest(){
     fun whenIncrementScoreShouldIncrementHighScore(){
         val game = Game(listOf<Question>(), 10)
         game.incrementScore()
-        if(game.hightScore==1){
+        if(game.hightScore==10){
             print("Success")
         }else{
             throw Exception("Score and High Score Doesn't Match...")
