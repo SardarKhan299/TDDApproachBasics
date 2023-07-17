@@ -1,6 +1,6 @@
 package com.raywenderlich.android.cocktails.game.viewmodel.model
 
-class Question(correctOption: String, inCorrectOption: String) {
+class Question(private val correctOption: String, val inCorrectOption: String) {
 
 
 
@@ -9,6 +9,6 @@ class Question(correctOption: String, inCorrectOption: String) {
 
     fun answer(option: String): Boolean {
         answeredOption = option
-        return true
+        return correctOption == answeredOption
     }
 }
