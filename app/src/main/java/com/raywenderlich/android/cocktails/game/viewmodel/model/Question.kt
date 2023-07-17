@@ -14,5 +14,9 @@ class Question(private val correctOption: String, val inCorrectOption: String) {
         return isAnsweredCorrectly
     }
 
+    fun getOptions(): List<Question> {
+        return emptyList()
+    }
+
 
 }

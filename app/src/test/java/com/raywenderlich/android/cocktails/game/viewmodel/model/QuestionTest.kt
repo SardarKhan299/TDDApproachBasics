@@ -42,4 +42,10 @@ class QuestionTest {
         val result = question.answer("Invalid")
     }
 
+    @Test
+    fun whenCreatingQuestionShouldReturnOptionWithCustomSort(){
+        val options = question.getOptions()
+        assertEquals(listOf("Correct","Incorrect"),options)
+    }
+
 }
