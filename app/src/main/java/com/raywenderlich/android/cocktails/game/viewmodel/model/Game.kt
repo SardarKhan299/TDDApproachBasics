@@ -1,18 +1,7 @@
 package com.raywenderlich.android.cocktails.game.viewmodel.model
 
-import android.util.Log
+class Game(val questions: List<Question>, val score:Score = Score(0)) {
 
-class Game(val questions: List<Question>, highScore: Int) {
-
-
-
-    private var score  = Score(highScore)
-
-    val currentScore :Int
-        get() = score.current
-
-    val highestScore :Int
-        get()= score.highest
 
     private var questionIndex = -1
 

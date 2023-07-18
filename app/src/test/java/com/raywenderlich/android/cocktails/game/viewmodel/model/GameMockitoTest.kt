@@ -10,7 +10,8 @@ class GameMockitoTest {
     @Test
     fun whenAnsweringShouldDelegateQuestion(){
        val question = mock<Question>()
-       val game = Game(listOf(question),10)
+        val score = mock<Score>()
+       val game = Game(listOf(question),score)
        game.answer(question,"OPTION")
         verify(question, times(1)).answer(eq("OPTION"))
 
@@ -20,18 +21,20 @@ class GameMockitoTest {
     fun whenAnswerCorrectlyShouldIncrementCurrentScore(){
         val question = mock<Question>()
         whenever(question.answer(anyString())).thenReturn(true)
-        val game = Game(listOf(question),10)
+        val score = mock<Score>()
+        val game = Game(listOf(question),score)
         game.answer(question,"OPTION")
-        Assert.assertEquals(1,game.currentScore)
+        verify(score).incrementScore()
     }
 
     @Test
     fun whenAnswerInCorrectlyShouldNotIncrementCurrentScore(){
         val question = mock<Question>()
+        val score = mock<Score>()
         whenever(question.answer("")).thenReturn(false)
-        val game = Game(listOf(question),10)
+        val game = Game(listOf(question),score)
         game.answer(question,"OPTION")
-        Assert.assertEquals(0,game.currentScore)
+        verify(score, never()).incrementScore()
     }
 
 }
