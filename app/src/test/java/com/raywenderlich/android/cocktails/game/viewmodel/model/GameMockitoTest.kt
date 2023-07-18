@@ -1,10 +1,9 @@
 package com.raywenderlich.android.cocktails.game.viewmodel.model
 
+import org.junit.Assert
 import org.junit.Test
-import org.mockito.kotlin.eq
-import org.mockito.kotlin.mock
-import org.mockito.kotlin.times
-import org.mockito.kotlin.verify
+import org.mockito.ArgumentMatchers.anyString
+import org.mockito.kotlin.*
 
 class GameMockitoTest {
 
@@ -16,4 +15,14 @@ class GameMockitoTest {
         verify(question, times(1)).answer(eq("OPTION"))
 
     }
+
+    @Test
+    fun whenAnswerCorrectlyShouldIncrementCurrentScore(){
+        val question = mock<Question>()
+        whenever(question.answer(anyString())).thenReturn(true)
+        val game = Game(listOf(question),10)
+        game.answer(question,"OPTION")
+        Assert.assertEquals(1,game.score)
+    }
+
 }
