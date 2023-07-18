@@ -27,4 +27,8 @@ class Game(val questions: List<Question>, highScore: Int) {
         }
     }
 
+    fun answer(question: Question, option: String) {
+        question.answer(option)
+    }
+
 }
