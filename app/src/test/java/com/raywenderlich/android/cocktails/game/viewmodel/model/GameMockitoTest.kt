@@ -22,16 +22,16 @@ class GameMockitoTest {
         whenever(question.answer(anyString())).thenReturn(true)
         val game = Game(listOf(question),10)
         game.answer(question,"OPTION")
-        Assert.assertEquals(1,game.score)
+        Assert.assertEquals(1,game.currentScore)
     }
 
     @Test
     fun whenAnswerInCorrectlyShouldNotIncrementCurrentScore(){
         val question = mock<Question>()
-        whenever(question.answer(anyString())).thenReturn(false)
+        whenever(question.answer("")).thenReturn(false)
         val game = Game(listOf(question),10)
         game.answer(question,"OPTION")
-        Assert.assertEquals(0,game.score)
+        Assert.assertEquals(0,game.currentScore)
     }
 
 }

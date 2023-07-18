@@ -4,18 +4,20 @@ import android.util.Log
 
 class Game(val questions: List<Question>, highScore: Int) {
 
-    var score =0
-        private set
-    var hightScore = highScore
-        private set
+
+
+    private var score  = Score(highScore)
+
+    val currentScore :Int
+        get() = score.current
+
+    val highestScore :Int
+        get()= score.highest
 
     private var questionIndex = -1
 
     fun incrementScore() {
-        score++
-        if(score>hightScore){
-            hightScore++
-        }
+        score.incrementScore()
     }
 
     fun nextQuestion(): Question? {
@@ -30,7 +32,7 @@ class Game(val questions: List<Question>, highScore: Int) {
     fun answer(question: Question, option: String) {
         val result = question.answer(option)
         if(result)
-            incrementScore()
+            score.incrementScore()
     }
 
 }

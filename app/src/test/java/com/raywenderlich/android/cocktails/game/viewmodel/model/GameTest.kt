@@ -15,14 +15,14 @@ class GameTest(){
         // When
         game.incrementScore()
         // Then
-        Assert.assertEquals(1,game.score)
+        Assert.assertEquals(1,game.currentScore)
     }
 
     @Test
     fun whenIncrementScoreShouldIncrementHighScore(){
         val game = Game(listOf<Question>(), 10)
         game.incrementScore()
-        if(game.hightScore==10){
+        if(game.highestScore==10){
             print("Success")
         }else{
             throw Exception("Score and High Score Doesn't Match...")
@@ -33,7 +33,7 @@ class GameTest(){
     fun whenIncrementScore_belowHighScore_notIncrementHighScore(){
         val game = Game(listOf<Question>(), 10)
         game.incrementScore()
-        assertEquals("High Score is Incrementing",10,game.hightScore)
+        assertEquals("High Score is Incrementing",10,game.highestScore)
     }
 
     @Test
