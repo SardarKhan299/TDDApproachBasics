@@ -38,8 +38,8 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class CocktailsRepositoryImpl(private val api: CocktailsApi, sharedPreferences: SharedPreferences) : CocktailsRepository {
-
+class CocktailsRepositoryImpl(private val api: CocktailsApi, val sharedPreferences: SharedPreferences) : CocktailsRepository {
+  private val HIGH_SCORE_KEY = "HIGH_SCORE_KEY"
   private var getAlcoholicCall: Call<CocktailsContainer>? = null
 
   override fun getAlcoholic(callback: RepositoryCallback<List<Cocktail>, String>) {
@@ -49,7 +49,9 @@ class CocktailsRepositoryImpl(private val api: CocktailsApi, sharedPreferences: 
   }
 
   override fun saveHighScore(score: Int) {
-
+    val editor = sharedPreferences.edit()
+    editor.putInt(HIGH_SCORE_KEY, score)
+    editor.apply()
   }
 
   private fun wrapCallback(callback: RepositoryCallback<List<Cocktail>, String>) =
