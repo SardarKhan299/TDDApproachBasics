@@ -13,7 +13,7 @@ class CocktailsGameFactoryImpl (private val repository: CocktailsRepository): Co
             }
 
             override fun onError(e: String) {
-
+                callback.onError()
             }
 
         })
