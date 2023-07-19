@@ -54,6 +54,8 @@ class CocktailsRepositoryImpl(private val api: CocktailsApi, val sharedPreferenc
     editor.apply()
   }
 
+  override fun getHighScore(): Int = 0
+
   private fun wrapCallback(callback: RepositoryCallback<List<Cocktail>, String>) =
       object : Callback<CocktailsContainer> {
         override fun onResponse(call: Call<CocktailsContainer>?,

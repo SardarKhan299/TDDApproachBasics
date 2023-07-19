@@ -24,4 +24,13 @@ class RepositoryUnitTest {
         }
     }
 
+    @Test
+    fun getScoreShouldGetFromSharedPreferences(){
+        val api: CocktailsApi = mock()
+        val sharedPreferences: SharedPreferences = mock()
+        val repository = CocktailsRepositoryImpl(api,sharedPreferences)
+        repository.getHighScore()
+        verify(sharedPreferences).getInt(any(),any())
+    }
+
 }
