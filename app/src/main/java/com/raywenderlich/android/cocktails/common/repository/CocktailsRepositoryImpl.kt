@@ -30,6 +30,7 @@
 
 package com.raywenderlich.android.cocktails.common.repository
 
+import android.content.SharedPreferences
 import com.raywenderlich.android.cocktails.common.network.Cocktail
 import com.raywenderlich.android.cocktails.common.network.CocktailsApi
 import com.raywenderlich.android.cocktails.common.network.CocktailsContainer
@@ -37,7 +38,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class CocktailsRepositoryImpl(private val api: CocktailsApi) : CocktailsRepository {
+class CocktailsRepositoryImpl(private val api: CocktailsApi, sharedPreferences: SharedPreferences) : CocktailsRepository {
 
   private var getAlcoholicCall: Call<CocktailsContainer>? = null
 
@@ -45,6 +46,10 @@ class CocktailsRepositoryImpl(private val api: CocktailsApi) : CocktailsReposito
     getAlcoholicCall?.cancel()
     getAlcoholicCall = api.getAlcoholic()
     getAlcoholicCall?.enqueue(wrapCallback(callback))
+  }
+
+  override fun saveHighScore(score: Int) {
+
   }
 
   private fun wrapCallback(callback: RepositoryCallback<List<Cocktail>, String>) =
