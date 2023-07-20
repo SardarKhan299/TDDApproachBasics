@@ -77,6 +77,15 @@ class CocktailGameViewModelUnitTest {
         verify(loadingObserver).onChanged(eq(false))
     }
 
+    @Test
+    fun initShouldShowScoreWhenFactoryReturnSuccess(){
+        val score = mock<Score>()
+        whenever(game.score).thenReturn(score)
+        setUpFactoryWithSuccessGame(game)
+        viewModel.initGame()
+        verify(scoreObserver).onChanged(eq(score))
+    }
+
     private fun setUpFactoryWithSuccessGame(game:Game){
         doAnswer {
             val callback:CocktailsGameFactory.Callback = it.getArgument(0)
