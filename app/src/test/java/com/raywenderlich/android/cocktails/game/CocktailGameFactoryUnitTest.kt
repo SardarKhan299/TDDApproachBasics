@@ -5,6 +5,8 @@ import com.raywenderlich.android.cocktails.common.repository.CocktailsRepository
 import com.raywenderlich.android.cocktails.common.repository.RepositoryCallback
 import com.raywenderlich.android.cocktails.factory.CocktailsGameFactory
 import com.raywenderlich.android.cocktails.factory.CocktailsGameFactoryImpl
+import com.raywenderlich.android.cocktails.game.viewmodel.model.Game
+import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.mockito.kotlin.*
@@ -50,6 +52,27 @@ class CocktailGameFactoryUnitTest {
         verify(callback).onError()
 
     }
+
+    @Test
+    fun buildGameShouldGetHighScoreFromRepo(){
+        setupRepositoryWithCoctails(repository)
+        factory.buildGame(mock())
+        verify(repository).getHighScore()
+    }
+
+    @Test
+    fun buildGameShouldBuildGameWithHighScore(){
+        var highScore = 100
+        setupRepositoryWithCoctails(repository)
+        whenever(repository.getHighScore()).thenReturn(highScore)
+        factory.buildGame(object :CocktailsGameFactory.Callback{
+            override fun onSuccess(game: Game)= Assert.assertEquals(highScore,game.score.highest)
+            override fun onError()= Assert.fail()
+
+        })
+
+    }
+
 
     private fun setupRepositoryWithCoctails(repository: CocktailsRepository) {
         doAnswer {
