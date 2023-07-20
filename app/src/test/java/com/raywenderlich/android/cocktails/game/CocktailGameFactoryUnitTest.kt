@@ -6,6 +6,7 @@ import com.raywenderlich.android.cocktails.common.repository.RepositoryCallback
 import com.raywenderlich.android.cocktails.factory.CocktailsGameFactory
 import com.raywenderlich.android.cocktails.factory.CocktailsGameFactoryImpl
 import com.raywenderlich.android.cocktails.game.viewmodel.model.Game
+import com.raywenderlich.android.cocktails.game.viewmodel.model.Question
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
@@ -71,6 +72,28 @@ class CocktailGameFactoryUnitTest {
 
         })
 
+    }
+
+    @Test
+    fun buildGameShouldBuildGameWithHQuestions(){
+        setupRepositoryWithCoctails(repository)
+        factory.buildGame(object :CocktailsGameFactory.Callback{
+            override fun onSuccess(game: Game){
+                cocktails.forEach {
+                    assertQuestion(game.nextQuestion(),it.strDrink,it.strDrinkThumb)
+                }
+            }
+            override fun onError()= Assert.fail()
+
+        })
+
+    }
+
+    private fun assertQuestion(question: Question?, correctOption: String, imageUrl: String) {
+        Assert.assertNotNull(question)
+        Assert.assertEquals(imageUrl,question?.imageUrl)
+        Assert.assertEquals(correctOption,question?.correctOption)
+        Assert.assertNotEquals(correctOption,question?.inCorrectOption)
     }
 
 

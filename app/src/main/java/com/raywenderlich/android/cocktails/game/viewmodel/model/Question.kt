@@ -1,6 +1,6 @@
 package com.raywenderlich.android.cocktails.game.viewmodel.model
 
-class Question(private val correctOption: String, val inCorrectOption: String) {
+class Question(val correctOption: String, val inCorrectOption: String,val imageUrl:String?=null) {
 
     val isAnsweredCorrectly:Boolean
         get() = correctOption == answeredOption
