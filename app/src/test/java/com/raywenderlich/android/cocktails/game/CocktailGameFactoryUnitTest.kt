@@ -39,7 +39,7 @@ class CocktailGameFactoryUnitTest {
     @Test
     fun buildGameShouldCallOnSuccess(){
         val callback = mock<CocktailsGameFactory.Callback>()
-        setupRepositoryWithCoctails(repository)
+        setupRepositoryWithCocktails(repository)
         factory.buildGame(callback)
         verify(callback).onSuccess(any())
 
@@ -56,7 +56,7 @@ class CocktailGameFactoryUnitTest {
 
     @Test
     fun buildGameShouldGetHighScoreFromRepo(){
-        setupRepositoryWithCoctails(repository)
+        setupRepositoryWithCocktails(repository)
         factory.buildGame(mock())
         verify(repository).getHighScore()
     }
@@ -64,7 +64,7 @@ class CocktailGameFactoryUnitTest {
     @Test
     fun buildGameShouldBuildGameWithHighScore(){
         var highScore = 100
-        setupRepositoryWithCoctails(repository)
+        setupRepositoryWithCocktails(repository)
         whenever(repository.getHighScore()).thenReturn(highScore)
         factory.buildGame(object :CocktailsGameFactory.Callback{
             override fun onSuccess(game: Game)= Assert.assertEquals(highScore,game.score.highest)
@@ -76,7 +76,7 @@ class CocktailGameFactoryUnitTest {
 
     @Test
     fun buildGameShouldBuildGameWithHQuestions(){
-        setupRepositoryWithCoctails(repository)
+        setupRepositoryWithCocktails(repository)
         factory.buildGame(object :CocktailsGameFactory.Callback{
             override fun onSuccess(game: Game){
                 cocktails.forEach {
@@ -97,7 +97,7 @@ class CocktailGameFactoryUnitTest {
     }
 
 
-    private fun setupRepositoryWithCoctails(repository: CocktailsRepository) {
+    private fun setupRepositoryWithCocktails(repository: CocktailsRepository) {
         doAnswer {
             val callback : RepositoryCallback<List<Cocktail>,String> = it.getArgument(0)
             callback.onSuccess(cocktails)
