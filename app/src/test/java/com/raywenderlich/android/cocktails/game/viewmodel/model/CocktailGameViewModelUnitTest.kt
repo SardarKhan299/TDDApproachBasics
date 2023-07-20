@@ -54,6 +54,12 @@ class CocktailGameViewModelUnitTest {
         verify(loadingObserver).onChanged(eq(true))
     }
 
+    @Test
+    fun initShouldHideError(){
+        viewModel.initGame()
+        verify(errorObserver).onChanged(eq(false))
+    }
+
     private fun setUpFactoryWithSuccessGame(game:Game){
         doAnswer {
             val callback:CocktailsGameFactory.Callback = it.getArgument(0)
