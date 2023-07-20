@@ -27,6 +27,7 @@ class CocktailsGameViewModel(val repository: CocktailsRepository, val factory: C
                 loadingLiveData.value = false
                 errorLiveData.value = false
                 scoreLiveData.value = game.score
+                questionLiveData.value = game.nextQuestion()
             }
 
             override fun onError() {
