@@ -95,6 +95,16 @@ class CocktailGameViewModelUnitTest {
         verify(questionObserver).onChanged(eq(question))
     }
 
+    @Test
+    fun nextQuestionShouldShowNextQuestion(){
+        val question1 = mock<Question>()
+        val question2 = mock<Question>()
+        whenever(game.nextQuestion()).thenReturn(question1).thenReturn(question2)
+        viewModel.initGame()
+        viewModel.nextQuestion()
+        verify(questionObserver).onChanged(eq(question2))
+    }
+
     private fun setUpFactoryWithSuccessGame(game:Game){
         doAnswer {
             val callback:CocktailsGameFactory.Callback = it.getArgument(0)

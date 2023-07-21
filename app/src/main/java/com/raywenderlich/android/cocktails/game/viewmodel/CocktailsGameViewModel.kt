@@ -38,4 +38,8 @@ class CocktailsGameViewModel(val repository: CocktailsRepository, val factory: C
         })
     }
 
+    fun nextQuestion() {
+
+    }
+
 }
