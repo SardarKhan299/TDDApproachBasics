@@ -5,20 +5,24 @@ import com.raywenderlich.android.cocktails.common.network.CocktailsApi
 import com.raywenderlich.android.cocktails.common.repository.CocktailsRepositoryImpl
 import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.mockito.Mock
+import org.mockito.junit.MockitoJUnitRunner
 import org.mockito.kotlin.*
 
+@RunWith(MockitoJUnitRunner::class)
 class RepositoryUnitTest {
 
+    @Mock
     lateinit var api: CocktailsApi
+    @Mock
     lateinit var sharePreferencesEditor:SharedPreferences.Editor
+    @Mock
     lateinit var sharedPreferences: SharedPreferences
     lateinit var repository: CocktailsRepositoryImpl
 
     @Before
     fun setup(){
-        api = mock()
-        sharePreferencesEditor = mock()
-        sharedPreferences = mock()
         whenever(sharedPreferences.edit()).thenReturn(sharePreferencesEditor)
         repository = CocktailsRepositoryImpl(api,sharedPreferences)
     }
