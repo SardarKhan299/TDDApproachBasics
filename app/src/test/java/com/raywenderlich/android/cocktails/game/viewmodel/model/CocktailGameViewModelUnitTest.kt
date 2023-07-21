@@ -116,7 +116,7 @@ class CocktailGameViewModelUnitTest {
         viewModel.answerQuestion(question,"Value")
 
         inOrder(game,repository,questionObserver,scoreObserver){
-            verify(game).answer(question,eq("Value"))
+            verify(game).answer(eq(question),eq("Value"))
             verify(repository).saveHighScore(any())
             verify(scoreObserver).onChanged(eq(score))
             verify(questionObserver).onChanged(eq(question))

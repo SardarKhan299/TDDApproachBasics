@@ -46,8 +46,13 @@ class CocktailsGameViewModel(val repository: CocktailsRepository, val factory: C
         }
     }
 
-    fun answerQuestion(question: Question, s: String) {
-
+    fun answerQuestion(question: Question, option: String) {
+        game?.let {
+            it.answer(question,option)
+            repository.saveHighScore(it.score.highest)
+            scoreLiveData.value = it.score
+            questionLiveData.value = question
+        }
     }
 
 
