@@ -106,6 +106,23 @@ class CocktailGameViewModelUnitTest {
         verify(questionObserver).onChanged(eq(question2))
     }
 
+    @Test
+    fun answerQuestion_shouldDelegateGame_saveHighScore_ShowQuestionAndScore(){
+        val score = mock<Score>()
+        val question = mock<Question>()
+        whenever(game.score).thenReturn(score)
+        setUpFactoryWithSuccessGame(game)
+        viewModel.initGame()
+        viewModel.answerQuestion(question,"Value")
+
+        inOrder(game,repository,questionObserver,scoreObserver){
+            verify(game).answer(question,eq("Value"))
+            verify(repository).saveHighScore(any())
+            verify(scoreObserver).onChanged(eq(score))
+            verify(questionObserver).onChanged(eq(question))
+        }
+    }
+
     private fun setUpFactoryWithSuccessGame(game:Game){
         doAnswer {
             val callback:CocktailsGameFactory.Callback = it.getArgument(0)

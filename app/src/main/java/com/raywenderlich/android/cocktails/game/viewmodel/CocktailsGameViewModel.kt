@@ -46,5 +46,9 @@ class CocktailsGameViewModel(val repository: CocktailsRepository, val factory: C
         }
     }
 
+    fun answerQuestion(question: Question, s: String) {
+
+    }
+
 
 }
