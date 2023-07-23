@@ -114,4 +114,20 @@ class GameMockitoTest {
         Assert.assertTrue(game.shouldGiveDoubleScore())
     }
 
+    @Test
+    fun whenAnswerCorrectlyThreeTimesShouldVerifyDoubleScore(){
+        val question = mock<Question>()
+        val question1 = mock<Question>()
+        val question2 = mock<Question>()
+        val score = mock<Score>()
+        whenever(question.answer("CORRECT_OPTION")).thenReturn(true)
+        whenever(question1.answer("CORRECT_OPTION")).thenReturn(true)
+        whenever(question2.answer("CORRECT_OPTION")).thenReturn(true)
+        val game = Game(listOf(question,question1,question2),score)
+        game.answer(question,"CORRECT_OPTION")
+        game.answer(question,"CORRECT_OPTION")
+        game.answer(question,"CORRECT_OPTION")
+        verify(score, times(1+1+2)).incrementScore()
+    }
+
 }
