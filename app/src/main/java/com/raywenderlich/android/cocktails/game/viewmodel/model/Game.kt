@@ -33,7 +33,7 @@ class Game(val questions: List<Question>, val score:Score = Score(0)) {
     }
 
     fun shouldGiveDoubleScore(): Boolean {
-        return false
+        return correctAnswerSequence >= 3
     }
 
 
