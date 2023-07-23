@@ -4,10 +4,7 @@ class Game(val questions: List<Question>, val score:Score = Score(0)) {
 
 
     private var questionIndex = -1
-
-    fun incrementScore() {
-        score.incrementScore()
-    }
+    var inCorrectAnswerSequence = 0
 
     fun nextQuestion(): Question? {
         if(questionIndex+1 <questions.size) {
@@ -20,8 +17,16 @@ class Game(val questions: List<Question>, val score:Score = Score(0)) {
 
     fun answer(question: Question, option: String) {
         val result = question.answer(option)
-        if(result)
+        if(result) {
             score.incrementScore()
+            inCorrectAnswerSequence = 0
+        }else{
+            inCorrectAnswerSequence++
+        }
+    }
+
+    fun shouldEndGame():Boolean {
+        return inCorrectAnswerSequence >= 3
     }
 
 }
