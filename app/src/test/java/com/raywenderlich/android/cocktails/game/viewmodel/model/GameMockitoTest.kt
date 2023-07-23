@@ -51,12 +51,16 @@ class GameMockitoTest {
     @Test
     fun whenAnswerInCorrectlyThreeTimesShouldIncrementSequence(){
         val question = mock<Question>()
+        val question1 = mock<Question>()
+        val question2 = mock<Question>()
         val score = mock<Score>()
-        whenever(question.answer("")).thenReturn(false)
-        val game = Game(listOf(question),score)
-        game.answer(question,"OPTION")
-        game.answer(question,"OPTION")
-        game.answer(question,"OPTION")
+        whenever(question.answer("INCORRECT_OPTION")).thenReturn(false)
+        whenever(question1.answer("INCORRECT_OPTION")).thenReturn(false)
+        whenever(question2.answer("INCORRECT_OPTION")).thenReturn(false)
+        val game = Game(listOf(question,question1,question2),score)
+        game.answer(question,"INCORRECT_OPTION")
+        game.answer(question,"INCORRECT_OPTION")
+        game.answer(question,"INCORRECT_OPTION")
         Assert.assertEquals(game.inCorrectAnswerSequence,3)
     }
 
