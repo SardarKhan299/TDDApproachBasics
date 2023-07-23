@@ -21,6 +21,7 @@ class Game(val questions: List<Question>, val score:Score = Score(0)) {
         if(result) {
             score.incrementScore()
             correctAnswerSequence++
+            if(shouldGiveDoubleScore()) score.incrementScore()
             inCorrectAnswerSequence = 0
         }else{
             correctAnswerSequence = 0
