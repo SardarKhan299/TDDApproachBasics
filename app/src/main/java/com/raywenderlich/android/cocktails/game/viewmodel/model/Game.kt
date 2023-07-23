@@ -3,6 +3,7 @@ package com.raywenderlich.android.cocktails.game.viewmodel.model
 class Game(val questions: List<Question>, val score:Score = Score(0)) {
 
 
+    var correctAnswerSequence = 0
     private var questionIndex = -1
     var inCorrectAnswerSequence = 0
 
@@ -19,8 +20,10 @@ class Game(val questions: List<Question>, val score:Score = Score(0)) {
         val result = question.answer(option)
         if(result) {
             score.incrementScore()
+            correctAnswerSequence++
             inCorrectAnswerSequence = 0
         }else{
+            correctAnswerSequence = 0
             inCorrectAnswerSequence++
         }
     }
@@ -28,5 +31,10 @@ class Game(val questions: List<Question>, val score:Score = Score(0)) {
     fun shouldEndGame():Boolean {
         return inCorrectAnswerSequence >= 3
     }
+
+    fun shouldGiveDoubleScore(): Boolean {
+        return false
+    }
+
 
 }

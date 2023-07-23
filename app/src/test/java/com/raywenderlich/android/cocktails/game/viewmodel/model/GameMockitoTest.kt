@@ -48,6 +48,27 @@ class GameMockitoTest {
         Assert.assertEquals(game.inCorrectAnswerSequence,1)
     }
 
+
+    @Test
+    fun whenAnswerCorrectlyShouldIncrementSequence(){
+        val question = mock<Question>()
+        val score = mock<Score>()
+        whenever(question.answer("Correct")).thenReturn(true)
+        val game = Game(listOf(question),score)
+        game.answer(question,"Correct")
+        Assert.assertEquals(game.correctAnswerSequence,1)
+    }
+
+    @Test
+    fun whenAnswerInCorrectlyShouldNotIncrementCorrectSequence(){
+        val question = mock<Question>()
+        val score = mock<Score>()
+        whenever(question.answer("")).thenReturn(false)
+        val game = Game(listOf(question),score)
+        game.answer(question,"Correct")
+        Assert.assertEquals(game.correctAnswerSequence,0)
+    }
+
     @Test
     fun whenAnswerInCorrectlyThreeTimesShouldIncrementSequence(){
         val question = mock<Question>()
@@ -75,6 +96,22 @@ class GameMockitoTest {
         game.answer(question,"OPTION")
         game.answer(question,"OPTION")
         Assert.assertTrue(game.shouldEndGame())
+    }
+
+    @Test
+    fun whenAnswerCorrectlyThreeTimesShouldGiveDoubleScore(){
+        val question = mock<Question>()
+        val question1 = mock<Question>()
+        val question2 = mock<Question>()
+        val score = mock<Score>()
+        whenever(question.answer("CORRECT_OPTION")).thenReturn(true)
+        whenever(question1.answer("CORRECT_OPTION")).thenReturn(true)
+        whenever(question2.answer("CORRECT_OPTION")).thenReturn(true)
+        val game = Game(listOf(question,question1,question2),score)
+        game.answer(question,"CORRECT_OPTION")
+        game.answer(question,"CORRECT_OPTION")
+        game.answer(question,"CORRECT_OPTION")
+        Assert.assertTrue(game.shouldGiveDoubleScore())
     }
 
 }
